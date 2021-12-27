@@ -7,12 +7,12 @@
 #include "Dump.h"
 #include "Count.h"
 
-enum Worker_ID { ReadFile_ID=1, Writefile_ID, Grep_ID, Sort_ID, Replace_ID, Dump_ID, Count_ID};
+enum Worker_ID { ReadFile_ID=1, Writefile_ID, Grep_ID, Sort_ID, Replace_ID, Dump_ID};
 
 
 unordered_map<string, int> worker_names({{"readfile", ReadFile_ID}, {"writefile", Writefile_ID},
                                          {"grep", Grep_ID}, {"sort", Sort_ID}, {"replace", Replace_ID},
-                                         {"dump", Dump_ID}, {"count", Count_ID}
+                                         {"dump", Dump_ID}
 });
 IWorker* Factory::createWorker(const string& worker_name, const string& arguments) {
     IWorker* p;
@@ -36,9 +36,6 @@ IWorker* Factory::createWorker(const string& worker_name, const string& argument
             break;
         case Dump_ID:
             p = new Dump(arguments);
-            break;
-        case Count_ID:
-            p = new Count(arguments);
             break;
     }
     return p;
